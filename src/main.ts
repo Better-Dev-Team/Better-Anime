@@ -23,6 +23,8 @@ async function createWindow() {
         titleBarOverlay: false,
     });
 
+
+
     // Window Control IPC
     ipcMain.on('window-min', () => mainWindow.minimize());
     ipcMain.on('window-max', () => {
@@ -30,6 +32,14 @@ async function createWindow() {
         else mainWindow.maximize();
     });
     ipcMain.on('window-close', () => mainWindow.close());
+
+    // Title Update IPC
+    ipcMain.on('update-title', (event, title) => {
+        const win = BrowserWindow.fromWebContents(event.sender);
+        if (win) {
+            win.setTitle(`Better Anime | ${title}`);
+        }
+    });
 
     const pluginManager = new PluginManager();
     const pluginsPath = path.join(__dirname, '../plugins');

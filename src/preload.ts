@@ -22,4 +22,13 @@ contextBridge.exposeInMainWorld('betterAnime', {
     loginMAL: (clientId: string) => ipcRenderer.invoke('mal-login', clientId),
 });
 
+// Monitor Title Changes for YaboStatus
+let lastTitle = '';
+setInterval(() => {
+    if (document.title !== lastTitle) {
+        lastTitle = document.title;
+        ipcRenderer.send('update-title', lastTitle);
+    }
+}, 3000);
+
 console.log('Better-Anime Preload Loaded');
