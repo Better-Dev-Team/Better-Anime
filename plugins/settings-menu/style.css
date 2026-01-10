@@ -1,0 +1,297 @@
+/* Title Bar Styles */
+#ba-titlebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    /* Increased from 32px */
+    background: #0f0f0f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 9999999;
+    user-select: none;
+    -webkit-app-region: drag;
+    /* Draggable */
+    border-bottom: 1px solid #222;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Left: Navigation */
+#ba-titlebar-left {
+    display: flex;
+    margin-left: 10px;
+    -webkit-app-region: no-drag;
+}
+
+#ba-titlebar-left button {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    width: 34px;
+    /* Increased size */
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin-right: 2px;
+}
+
+#ba-titlebar-left button:hover {
+    background: #333;
+    color: white;
+}
+
+#ba-titlebar-left svg {
+    width: 20px;
+    /* Larger icons */
+    height: 20px;
+    fill: currentColor;
+}
+
+/* Center: Title */
+#ba-titlebar-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Title removed */
+
+/* Right: Controls */
+#ba-titlebar-right {
+    display: flex;
+    align-items: center;
+    -webkit-app-region: no-drag;
+    height: 100%;
+}
+
+#ba-titlebar-settings {
+    background: transparent;
+    border: none;
+    color: #9d4edd;
+    /* Purple Accent */
+    width: 48px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#ba-titlebar-settings:hover {
+    background: #2a1a3a;
+}
+
+#ba-titlebar-settings svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.ba-separator {
+    width: 1px;
+    height: 20px;
+    background: #333;
+    margin: 0 5px;
+}
+
+.ba-window-ctrl {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    width: 50px;
+    /* Wider click area */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.ba-window-ctrl:hover {
+    background: #333;
+    color: white;
+}
+
+.ba-window-ctrl.ba-close:hover {
+    background: #e81123;
+    color: white;
+}
+
+.ba-window-ctrl svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+}
+
+/* Modal Overlay (Existing) */
+#ba-settings-modal-overlay {
+    /* Ensure it sits below titlebar if needed, or above */
+    z-index: 1000000;
+}
+
+#ba-settings-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000000;
+    display: none;
+    /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+#ba-settings-modal-overlay.visible {
+    display: flex;
+    opacity: 1;
+}
+
+#ba-settings-modal {
+    background: #1e1e1e;
+    width: 600px;
+    max-width: 90%;
+    height: 70vh;
+    border-radius: 12px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    font-family: 'Segoe UI', sans-serif;
+    color: #eee;
+}
+
+#ba-settings-header {
+    padding: 20px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#ba-settings-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#ba-settings-close {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#ba-settings-close:hover {
+    color: white;
+}
+
+#ba-settings-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+#ba-settings-sidebar {
+    width: 180px;
+    background: #252525;
+    border-right: 1px solid #333;
+    padding: 10px 0;
+    overflow-y: auto;
+}
+
+.ba-settings-tab-btn {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.ba-settings-tab-btn:hover {
+    background: #333;
+    color: white;
+}
+
+.ba-settings-tab-btn.active {
+    background: #2e51a2;
+    color: white;
+    border-left: 3px solid #6688dd;
+}
+
+#ba-settings-content {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.ba-settings-section {
+    display: none;
+}
+
+.ba-settings-section.active {
+    display: block;
+}
+
+/* Styled Inputs for Plugins */
+.ba-input-group {
+    margin-bottom: 15px;
+}
+
+.ba-input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+.ba-input-group input[type="text"],
+.ba-input-group input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    background: #333;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: white;
+}
+
+.ba-btn {
+    padding: 8px 16px;
+    background: #2e51a2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.ba-btn:hover {
+    background: #3e61b2;
+}
+
+.ba-btn-secondary {
+    background: #444;
+}
+
+.ba-btn-secondary:hover {
+    background: #555;
+}
