@@ -6,6 +6,38 @@ import * as path from 'path';
 import { PluginManager } from './plugin_manager';
 import { ElectronBlocker } from '@cliqz/adblocker-electron';
 import fetch from 'cross-fetch';
+import { Client } from 'discord-rpc';
+
+const clientId = '1450804601925402685';
+const rpc = new Client({ transport: 'ipc' });
+
+let lastTitle = '';
+let startTimestamp = Date.now();
+let rpcReady = false;
+
+function setActivity(title: string) {
+    if (!rpc || !title || !rpcReady) return;
+
+    if (title !== lastTitle) {
+        startTimestamp = Date.now();
+        lastTitle = title;
+    }
+
+    const details = title.length > 128 ? title.substring(0, 125) + '...' : title;
+
+    rpc.setActivity({
+        details: details,
+        state: 'Watching Anime',
+        startTimestamp,
+        instance: false,
+    }).catch(console.error);
+}
+
+rpc.on('ready', () => {
+    console.log('Discord RPC Ready');
+    rpcReady = true;
+    setActivity('Browsing Anime');
+});
 
 async function createWindow() {
     const mainWindow = new BrowserWindow({
@@ -39,6 +71,7 @@ async function createWindow() {
         if (win) {
             win.setTitle(`Better Anime | ${title}`);
         }
+        setActivity(title);
     });
 
     const pluginManager = new PluginManager();
@@ -364,3 +397,5 @@ app.on('window-all-closed', () => {
         app.quit();
     }
 });
+
+rpc.login({ clientId }).catch(console.error);
